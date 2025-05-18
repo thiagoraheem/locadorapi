@@ -37,7 +37,7 @@ public class ProductTypeController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<ProductType> update(@PathVariable Integer id, @RequestBody ProductType productType){
         try{
             return ResponseEntity.ok(productTypeService.update(id, productType));
