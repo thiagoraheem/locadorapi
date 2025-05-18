@@ -1,4 +1,7 @@
 package com.locador.api.repository.basics;
 
-public interface ProductRepository {
+import com.locador.api.model.basics.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 }
