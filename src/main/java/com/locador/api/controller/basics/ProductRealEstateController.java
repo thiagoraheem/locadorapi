@@ -22,7 +22,7 @@ public class ProductRealEstateController {
         try {
             return ResponseEntity.ok(productRealEstateService.findAll());
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -38,7 +38,7 @@ public class ProductRealEstateController {
         try {
             return ResponseEntity.ok(productRealEstateService.save(productRealEstate));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -47,7 +47,7 @@ public class ProductRealEstateController {
         try {
             return ResponseEntity.ok(productRealEstateService.update(id, productRealEstate));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.notFound().build();
         }
     }
 
