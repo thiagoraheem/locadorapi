@@ -2,13 +2,11 @@ package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.Customer;
 import com.locador.api.service.basics.CustomerService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController

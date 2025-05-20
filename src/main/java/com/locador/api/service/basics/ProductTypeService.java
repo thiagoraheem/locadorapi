@@ -1,6 +1,5 @@
 package com.locador.api.service.basics;
 
-import com.locador.api.model.basics.Product;
 import com.locador.api.model.basics.ProductType;
 import com.locador.api.repository.basics.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

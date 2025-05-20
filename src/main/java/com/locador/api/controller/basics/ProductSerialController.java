@@ -1,6 +1,5 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.model.basics.Product;
 import com.locador.api.model.basics.ProductSerial;
 import com.locador.api.service.basics.ProductSerialService;
 import org.springframework.beans.factory.annotation.Autowired;

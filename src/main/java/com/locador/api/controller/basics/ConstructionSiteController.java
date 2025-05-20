@@ -1,9 +1,7 @@
 package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.ConstructionSite;
-import com.locador.api.model.basics.Employee;
 import com.locador.api.service.basics.ConstructionSiteService;
-import com.locador.api.service.basics.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
