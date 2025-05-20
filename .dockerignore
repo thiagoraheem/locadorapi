@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+.github/
+
+# Maven
+target/
+!target/*.jar
+
+# Logs
+logs/
+*.log
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Outros
+README.md
+LICENSE
+.DS_Store
