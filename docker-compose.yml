@@ -37,4 +37,8 @@ networks:
     driver: bridge
 
 volumes:
+<<<<<<< HEAD
   postgres-data:
+=======
+  pgdata: {}
+>>>>>>> 4e9237b (build: add Docker and CI configuration for application deployment)
