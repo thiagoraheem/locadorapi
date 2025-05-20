@@ -2,13 +2,11 @@ package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.PaymentMethod;
 import com.locador.api.service.basics.PaymentMethodService;
-import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
