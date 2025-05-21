@@ -1,6 +1,7 @@
 package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.Address;
+import com.locador.api.model.basics.ProductVehicle;
 import com.locador.api.service.basics.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,16 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public List<Address> getAll(){
-        return addressService.findAll();
+    public ResponseEntity<List<Address>> getAll(){
+        try {
+            List<Address> address = addressService.findAll();
+            if (address.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(address);
+        }catch(RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")

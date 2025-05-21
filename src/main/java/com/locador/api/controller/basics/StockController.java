@@ -15,7 +15,7 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<Stock>> getAll(){
         try{
             List<Stock> stocks = stockService.findAll();
@@ -28,8 +28,8 @@ public class StockController {
         }
     }
 
-    @RequestMapping("/{id}")
-    public ResponseEntity<Stock> getById(Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Stock> getById(@PathVariable Integer id){
         return stockService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
