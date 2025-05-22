@@ -2,9 +2,7 @@ package com.locador.api.service.basics;
 
 import com.locador.api.model.basics.Stock;
 import com.locador.api.repository.basics.StockRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
