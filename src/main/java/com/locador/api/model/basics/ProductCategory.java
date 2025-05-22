@@ -40,4 +40,12 @@ public class ProductCategory {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    public ProductCategory() {   }
+
+    public ProductCategory(Integer id, String name, Boolean status) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+    }
 }

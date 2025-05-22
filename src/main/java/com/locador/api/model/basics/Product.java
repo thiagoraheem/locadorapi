@@ -1,6 +1,9 @@
 package com.locador.api.model.basics;
 
 import java.math.BigDecimal;
+
+import com.locador.api.dto.ProductRequest;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,7 +50,7 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -103,4 +106,20 @@ public class Product {
     public void setType(ProductType type) {
         this.type = type;
     }
+
+    public Product() {
+        
+    }
+
+    public Product (ProductRequest productRequest) {
+        this.category = new ProductCategory(productRequest.getCategory_id(), "", true);
+        this.description = productRequest.getDescription();
+        this.brand = productRequest.getBrand();
+        this.model = productRequest.getModel();
+        this.costPrice = productRequest.getCostPrice();
+        this.rentalPrice = productRequest.getRentalPrice();
+        this.status = productRequest.getStatus();
+        this.type = new ProductType(productRequest.getType_id(), "");
+    }
+
 }

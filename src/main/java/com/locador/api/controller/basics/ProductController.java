@@ -1,5 +1,6 @@
 package com.locador.api.controller.basics;
 
+import com.locador.api.dto.ProductRequest;
 import com.locador.api.model.basics.Product;
 import com.locador.api.service.basics.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody Product product){
+    public ResponseEntity<ProductRequest> create(@RequestBody ProductRequest product){
         try{
             return ResponseEntity.ok(productService.save(product));
         } catch(RuntimeException e){
