@@ -15,16 +15,20 @@ public class ProductSerialController {
     @Autowired
     private ProductSerialService productSerialService;
 
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<ProductSerial>> getAll(){
         try{
-            return ResponseEntity.ok(productSerialService.findAll());
-        }catch(RuntimeException e){
-            return ResponseEntity.notFound().build();
+            List<ProductSerial> productSerials = productSerialService.findAll();
+            if(productSerials.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(productSerials);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
         }
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductSerial> getById(@PathVariable Integer id){
         return productSerialService.findById(id)
                 .map(ResponseEntity::ok)

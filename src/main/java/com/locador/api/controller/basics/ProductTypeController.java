@@ -17,8 +17,16 @@ public class ProductTypeController {
     private ProductTypeService productTypeService;
 
     @GetMapping
-    public List<ProductType> getAll() {
-        return productTypeService.findAll();
+    public ResponseEntity<List<ProductType>> getAll() {
+        try{
+            List<ProductType> productTypes = productTypeService.findAll();
+            if(productTypes.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(productTypes);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{id}")

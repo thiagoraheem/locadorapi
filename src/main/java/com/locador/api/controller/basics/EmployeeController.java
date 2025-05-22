@@ -16,30 +16,38 @@ public class EmployeeController
 {
 
     @Autowired
-    private EmployeeService service;
+    private EmployeeService employeeService;
 
     @GetMapping
-    public List<Employee> getAll()
+    public ResponseEntity<List<Employee>> getAll()
     {
-        return service.findAll(); // Retorna uma lista de todos os clientes do banco de dados
+        try{
+            List<Employee> employees = employeeService.findAll();
+            if(employees.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(employees);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getById(@PathVariable Integer id) {
-        return service.findById(id)
+        return employeeService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
-        return ResponseEntity.ok(service.save(employee));
+        return ResponseEntity.ok(employeeService.save(employee));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody Employee employee) {
         try {
-            return ResponseEntity.ok(service.update(id, employee));
+            return ResponseEntity.ok(employeeService.update(id, employee));
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }
@@ -48,7 +56,7 @@ public class EmployeeController
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         try {
-            service.delete(id);
+            employeeService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
