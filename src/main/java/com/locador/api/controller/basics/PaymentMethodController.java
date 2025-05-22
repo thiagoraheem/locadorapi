@@ -17,8 +17,16 @@ public class PaymentMethodController {
     private PaymentMethodService paymentMethodService;
 
     @GetMapping
-    public List<PaymentMethod> getAll(){
-        return paymentMethodService.findAll();
+    public ResponseEntity<List<PaymentMethod>> getAll(){
+        try{
+            List<PaymentMethod> paymentMethods = paymentMethodService.findAll();
+            if(paymentMethods.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(paymentMethods);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{id}")

@@ -17,9 +17,17 @@ public class ConstructionSiteController {
     private ConstructionSiteService constructionSiteService;
 
     @GetMapping
-    public List<ConstructionSite> getAll()
+    public ResponseEntity<List<ConstructionSite>> getAll()
     {
-        return constructionSiteService.findAll(); // Retorna uma lista de todos os clientes do banco de dados
+        try{
+            List<ConstructionSite> constructionSites = constructionSiteService.findAll();
+            if(constructionSites.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(constructionSites);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{id}")

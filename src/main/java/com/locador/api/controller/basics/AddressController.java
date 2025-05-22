@@ -17,8 +17,16 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public List<Address> getAll(){
-        return addressService.findAll();
+    public ResponseEntity<List<Address>> getAll(){
+        try {
+            List<Address> address = addressService.findAll();
+            if (address.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(address);
+        }catch(RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")

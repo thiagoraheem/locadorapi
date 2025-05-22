@@ -17,8 +17,16 @@ public class PersonTypeController {
     private PersonTypeService personTypeService;
 
     @GetMapping
-    public List<PersonType> getAll(){
-        return personTypeService.findAll();
+    public ResponseEntity<List<PersonType>> getAll(){
+        try{
+            List<PersonType> personTypes = personTypeService.findAll();
+            if(personTypes.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(personTypes);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{id}")
