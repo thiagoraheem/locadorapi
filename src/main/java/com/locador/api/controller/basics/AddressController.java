@@ -1,7 +1,6 @@
 package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.Address;
-import com.locador.api.model.basics.ProductVehicle;
 import com.locador.api.service.basics.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

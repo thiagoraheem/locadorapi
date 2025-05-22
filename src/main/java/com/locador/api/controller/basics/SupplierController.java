@@ -2,7 +2,6 @@ package com.locador.api.controller.basics;
 
 import com.locador.api.model.basics.Supplier;
 import com.locador.api.service.basics.SupplierService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<Supplier>> getAll(){
         try{
             List<Supplier> suppliers = supplierService.findAll();
@@ -28,7 +27,7 @@ public class SupplierController {
             return ResponseEntity.noContent().build();
         }
     }
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Supplier> getById(@PathVariable Integer id){
         return supplierService.findById(id)
                 .map(ResponseEntity::ok)

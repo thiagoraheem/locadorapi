@@ -19,9 +19,13 @@ public class ProductRealEstateController {
     @GetMapping
     public ResponseEntity<List<ProductRealEstate>> getAll() {
         try {
-            return ResponseEntity.ok(productRealEstateService.findAll());
+            List<ProductRealEstate> productRealEstates = productRealEstateService.findAll();
+            if (productRealEstates.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(productRealEstates);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
     }
 

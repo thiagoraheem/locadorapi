@@ -16,9 +16,17 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping
-    public List<Customer> getAll(){
-        return customerService.findAll();
+    @GetMapping
+    public ResponseEntity<List<Customer>> getAll(){
+        try{
+            List<Customer> customers = customerService.findAll();
+            if(customers.isEmpty()){
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(customers);
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("{id}")
