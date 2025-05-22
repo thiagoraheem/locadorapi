@@ -31,4 +31,11 @@ public class ProductType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public ProductType() {   }
+
+    public ProductType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

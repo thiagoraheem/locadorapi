@@ -2,8 +2,11 @@ package com.locador.api.dto;
 
 import java.math.BigDecimal;
 
-public class ProductCreate {
+import com.locador.api.model.basics.Product;
+
+public class ProductRequest {
     private int category_id;
+
     private String description;
     private String brand;
     private String model;
@@ -59,6 +62,19 @@ public class ProductCreate {
     }
     public void setType_id(int type_id) {
         this.type_id = type_id;
+    }
+
+    public ProductRequest() { }
+
+    public ProductRequest(Product product) {
+        this.category_id = product.getCategory().getId();
+        this.description = product.getDescription();
+        this.brand = product.getBrand();
+        this.model = product.getModel();
+        this.costPrice = product.getCostPrice();
+        this.rentalPrice = product.getRentalPrice();
+        this.status = product.getStatus();
+        this.type_id = product.getType().getId();
     }
 
 }

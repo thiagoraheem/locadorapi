@@ -1,5 +1,6 @@
 package com.locador.api.service.basics;
 
+import com.locador.api.dto.ProductRequest;
 import com.locador.api.model.basics.Product;
 import com.locador.api.repository.basics.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,13 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public Product save(Product product){
-        return productRepository.save(product);
+    public ProductRequest save(ProductRequest product)
+    {
+        Product newProduct = new Product(product);
+
+        newProduct = productRepository.save(newProduct);
+
+        return new ProductRequest(newProduct);
     }
 
     public Product update(Integer id, Product product){
