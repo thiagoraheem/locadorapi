@@ -1,8 +1,11 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.dto.ProductRequest;
+import com.locador.api.dto.basics.ProductRequest;
+import com.locador.api.dto.basics.ProductResponse;
 import com.locador.api.model.basics.Product;
 import com.locador.api.service.basics.ProductService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,38 +21,38 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAll() {
+    public ResponseEntity<List<ProductResponse>> getAll() {
         try {
-            List<Product> produtos = productService.findAll();
-        if (produtos.isEmpty()) {
+            List<ProductResponse> productResponse = productService.findAll();
+        if (productResponse.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(produtos);
+        return ResponseEntity.ok(productResponse);
         } catch(RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> GetById(@PathVariable Integer id){
+    public ResponseEntity<ProductResponse> GetById(@PathVariable @Positive Integer id){
         return productService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<ProductRequest> create(@RequestBody ProductRequest product){
+    public ResponseEntity<ProductResponse> create(@RequestBody @Valid ProductRequest productRequest){
         try{
-            return ResponseEntity.ok(productService.save(product));
+            return ResponseEntity.ok(productService.save(productRequest));
         } catch(RuntimeException e){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Integer id, @RequestBody Product product){
+    public ResponseEntity<ProductResponse> update(@PathVariable @Positive Integer id, @RequestBody ProductRequest productRequest){
         try{
-            return ResponseEntity.ok(productService.update(id, product));
+            return ResponseEntity.ok(productService.update(id, productRequest));
         }catch(RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
