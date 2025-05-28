@@ -54,8 +54,8 @@ public class EmployeeController
         }
     }
 
-    @PatchMapping("/{id}/active")
-    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id, boolean isActive) {
+    @PatchMapping("/{id}/{isActive}")
+    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id,@PathVariable boolean isActive) {
         try {
             return ResponseEntity.ok(employeeService.changeActive(id, isActive));
         } catch (RuntimeException ex) {
