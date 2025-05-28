@@ -112,14 +112,16 @@ public class Product {
     }
 
     public Product (ProductRequest productRequest) {
-        this.category = new ProductCategory(productRequest.getCategory_id(), productRequest.getCategory_name(), productRequest.getCategory_status());
+        //nessa linha, teria que fazer uma consulta no banco de dados pra poder...
+        //...retornar o name e o status
+        this.category = new ProductCategory(productRequest.getCategory_id(), "", true);
         this.description = productRequest.getDescription();
         this.brand = productRequest.getBrand();
         this.model = productRequest.getModel();
         this.costPrice = productRequest.getCostPrice();
         this.rentalPrice = productRequest.getRentalPrice();
         this.status = productRequest.getStatus();
-        this.type = new ProductType(productRequest.getType_id(), productRequest.getType_name());
+        this.type = new ProductType(productRequest.getType_id(), "");
     }
 
 }

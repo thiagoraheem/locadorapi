@@ -40,7 +40,7 @@ public class ProductService {
     }
 
 public ProductResponse update(Integer id, ProductRequest productRequest) {
-    if (!productRepository.existsById(id)) {
+    if (!productRepository.existsById(id))   {
         throw new RuntimeException("Produto não encontrado");
     }
     Product product = new Product(productRequest);

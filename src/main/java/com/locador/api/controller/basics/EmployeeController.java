@@ -1,6 +1,7 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.model.basics.Employee;
+import com.locador.api.dto.basics.EmployeeRequest;
+import com.locador.api.dto.basics.EmployeeResponse;
 import com.locador.api.service.basics.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +20,35 @@ public class EmployeeController
     private EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAll()
+    public ResponseEntity<List<EmployeeResponse>> getAll()
     {
         try{
-            List<Employee> employees = employeeService.findAll();
-            if(employees.isEmpty()){
+            List<EmployeeResponse> employeesResponse = employeeService.findAll();
+            if(employeesResponse.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(employees);
+            return ResponseEntity.ok(employeesResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getById(@PathVariable Integer id) {
+    public ResponseEntity<EmployeeResponse> getById(@PathVariable Integer id) {
         return employeeService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Employee> create(@RequestBody Employee employee) {
-        return ResponseEntity.ok(employeeService.save(employee));
+    public ResponseEntity<EmployeeResponse> create(@RequestBody EmployeeRequest employeeRequest) {
+        return ResponseEntity.ok(employeeService.save(employeeRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody Employee employee) {
+    public ResponseEntity<EmployeeResponse> update(@PathVariable Integer id, @RequestBody EmployeeRequest employeeRequest) {
         try {
-            return ResponseEntity.ok(employeeService.update(id, employee));
+            return ResponseEntity.ok(employeeService.update(id, employeeRequest));
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }
