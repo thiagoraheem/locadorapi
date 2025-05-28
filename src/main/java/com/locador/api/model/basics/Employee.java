@@ -1,7 +1,6 @@
 package com.locador.api.model.basics;
 
 import com.locador.api.dto.basics.EmployeeRequest;
-import com.locador.api.service.basics.EmployeeService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -103,9 +102,6 @@ public class Employee {
         this.cpf = employeeRequest.getCpf();
         this.email = employeeRequest.getEmail();
         this.phone = employeeRequest.getPhone();
-        this.roleId = employeeRequest.getRoleId();
         this.username = employeeRequest.getUsername();
-        this.password = employeeRequest.getPassword();
-        this.isActive = employeeRequest.getIsActive();
     }
 }
