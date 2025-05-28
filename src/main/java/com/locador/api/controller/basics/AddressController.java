@@ -1,6 +1,7 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.model.basics.Address;
+import com.locador.api.dto.basics.AddressRequest;
+import com.locador.api.dto.basics.AddressResponse;
 import com.locador.api.service.basics.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,34 +18,34 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public ResponseEntity<List<Address>> getAll(){
+    public ResponseEntity<List<AddressResponse>> getAll(){
         try {
-            List<Address> address = addressService.findAll();
-            if (address.isEmpty()) {
+            List<AddressResponse> addressResponses = addressService.findAll();
+            if (addressResponses.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(address);
+            return ResponseEntity.ok(addressResponses);
         }catch(RuntimeException e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Address> getById(@PathVariable Integer id){
+    public ResponseEntity<AddressResponse> getById(@PathVariable Integer id){
         return addressService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
 
     }
     @PostMapping
-    public ResponseEntity<Address> create(@RequestBody Address address){
-        return ResponseEntity.ok(addressService.save(address));
+    public ResponseEntity<AddressResponse> create(@RequestBody AddressRequest addressRequest){
+        return ResponseEntity.ok(addressService.save(addressRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Address> update(@PathVariable Integer id, @RequestBody Address address){
+    public ResponseEntity<AddressResponse> update(@PathVariable Integer id, @RequestBody AddressRequest addressRequest){
         try {
-            return ResponseEntity.ok(addressService.update(id, address));
+            return ResponseEntity.ok(addressService.update(id, addressRequest));
         }
         catch(RuntimeException e){
            return ResponseEntity.notFound().build();
