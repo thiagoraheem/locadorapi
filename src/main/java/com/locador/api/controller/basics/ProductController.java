@@ -6,6 +6,7 @@ import com.locador.api.model.basics.Product;
 import com.locador.api.service.basics.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,15 @@ public class ProductController {
         try{
             return ResponseEntity.ok(productService.update(id, productRequest));
         }catch(RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}/{status}")
+    public ResponseEntity<ProductResponse> updateStatus(@PathVariable Integer id,@PathVariable String status){
+        try{
+            return ResponseEntity.ok(productService.updateStatus(id, status));
+        } catch(RuntimeException e){
             return ResponseEntity.notFound().build();
         }
     }
