@@ -49,6 +49,17 @@ public class EmployeeService {
         return new EmployeeResponse(employee);
     }
 
+    public EmployeeResponse changeActive(Integer id, boolean isActive) {
+
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+
+        employee.setIsActive(isActive);
+        employeeRepository.save(employee);
+
+        return new EmployeeResponse(employee);
+    }
+
     public void delete(Integer id) {
         if (!employeeRepository.existsById(id)) {
             throw new RuntimeException("Funcionário não encontrado");
