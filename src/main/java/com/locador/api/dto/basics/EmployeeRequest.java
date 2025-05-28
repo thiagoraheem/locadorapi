@@ -8,10 +8,7 @@ public class EmployeeRequest {
     private String cpf;
     private String email;
     private String phone;
-    private Integer roleId;
     private String username;
-    private String password;
-    private Boolean isActive;
 
     public String getName() {
         return name;
@@ -45,13 +42,6 @@ public class EmployeeRequest {
         this.phone = phone;
     }
 
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
 
     public String getUsername() {
         return username;
@@ -61,22 +51,6 @@ public class EmployeeRequest {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
     public EmployeeRequest(){}
 
     public EmployeeRequest(Employee employee) {
@@ -84,9 +58,6 @@ public class EmployeeRequest {
         this.cpf = employee.getCpf();
         this.email = employee.getEmail();
         this.phone = employee.getPhone();
-        this.roleId = employee.getRoleId();
         this.username = employee.getUsername();
-        this.password = employee.getPassword();
-        this.isActive = employee.getIsActive();
     }
 }
