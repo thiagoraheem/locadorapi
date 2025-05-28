@@ -1,12 +1,16 @@
 package com.locador.api.service.basics;
 
+import com.locador.api.dto.basics.AddressRequest;
+import com.locador.api.dto.basics.AddressResponse;
 import com.locador.api.model.basics.Address;
 import com.locador.api.repository.basics.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 @Service
 public class AddressService {
@@ -14,24 +18,34 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public List<Address> findAll(){
-        return addressRepository.findAll();
+    public List<AddressResponse> findAll(){
+        List<Address> address = addressRepository.findAll();
+        List<AddressResponse> addressResponses = new ArrayList<>();
+        for(int i = 0; i < address.size(); i++){
+            addressResponses.add(new AddressResponse(address.get(i)));
+        }
+        return addressResponses;
     }
 
-    public Optional<Address> findById(Integer id){
-        return addressRepository.findById(id);
+    public Optional<AddressResponse> findById(Integer id){
+        Optional<Address> address = addressRepository.findById(id);
+        return address.map(AddressResponse::new);
     }
 
-    public Address save(Address address){
-        return addressRepository.save(address);
+    public AddressResponse save(AddressRequest addressRequest){
+        Address address = new Address(addressRequest);
+        addressRepository.save(address);
+        return new AddressResponse(address);
     }
 
-    public Address update(Integer id, Address address){
+    public AddressResponse update(Integer id, AddressRequest addressRequest){
         if(!addressRepository.existsById(id)){
             throw new RuntimeException("Endereço não encontrado");
         }
+        Address address = new Address(addressRequest);
         address.setId(id);
-        return addressRepository.save(address);
+        addressRepository.save(address);
+        return new AddressResponse(address);
     }
 
     public void delete(Integer id) {

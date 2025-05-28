@@ -7,23 +7,15 @@ import java.math.BigDecimal;
 public class ProductResponse {
 
     private Integer id;
-
     private int category_id;
     private String category_name;
     private boolean category_status;
-
     private String description;
-
     private String brand;
-
     private String model;
-
     private BigDecimal costPrice;
-
     private BigDecimal rentalPrice;
-
     private String status;
-
     private int type_id;
     private String type_name;
 
@@ -33,7 +25,7 @@ public class ProductResponse {
     public ProductResponse(Product product) {
         this.id = product.getId();
         this.category_id = product.getCategory().getId();
-        this.category_name = product.getCategory().getName();
+        this.category_name = product.getCategory().getName();//perguntar pro tiago sobre isso
         this.category_status = product.getCategory().getStatus();
         this.description = product.getDescription();
         this.brand = product.getBrand();
