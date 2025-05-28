@@ -35,7 +35,7 @@ public class ProductRequest {
     @NotBlank(message = "O status é obrigatório")
     private String status;
 
-    @Positive(message = "O ID do tipo deve ser um número positivo")
+    @Positive(message = "O ID do tipo deve ser um número positivo e não pode ser nulo")
     private int type_id;
 
     public int getCategory_id() { return category_id; }
