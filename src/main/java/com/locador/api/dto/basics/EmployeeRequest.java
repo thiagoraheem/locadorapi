@@ -1,13 +1,19 @@
 package com.locador.api.dto.basics;
 
 import com.locador.api.model.basics.Employee;
+import jakarta.validation.constraints.NotBlank;
 
 public class EmployeeRequest {
 
+    @NotBlank(message = "O nome é obrigatório")
     private String name;
+    @NotBlank(message = "O cpf é obrigatório")
     private String cpf;
+    @NotBlank(message = "O e-mail é obrigatório")
     private String email;
+    @NotBlank(message = "O número de telefone é obrigatório")
     private String phone;
+    @NotBlank(message = "O nome de usuário é obrigatório")
     private String username;
 
     public String getName() {
