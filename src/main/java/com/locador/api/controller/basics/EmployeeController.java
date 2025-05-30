@@ -54,8 +54,8 @@ public class EmployeeController
         }
     }
 
-    @PatchMapping("/{id}/{isActive}/isactive")
-    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id,@PathVariable boolean isActive) {
+    @PatchMapping("/{id}/isactive")
+    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id, boolean isActive) {
         try {
             return ResponseEntity.ok(employeeService.changeActive(id, isActive));
         } catch (RuntimeException ex) {
@@ -63,8 +63,8 @@ public class EmployeeController
         }
     }
 
-    @PatchMapping("/{id}/{password}/password")
-    public ResponseEntity<EmployeeResponse> updatePassword(@PathVariable Integer id,@PathVariable String password) {
+    @PatchMapping("/{id}/password")
+    public ResponseEntity<EmployeeResponse> updatePassword(@PathVariable Integer id, @RequestBody String password) {
         try {
             return ResponseEntity.ok(employeeService.updatePassword(id, password));
         } catch (RuntimeException ex) {
@@ -72,8 +72,8 @@ public class EmployeeController
         }
     }
 
-    @PatchMapping("/{id}/{roleId}/roleid")
-    public ResponseEntity<EmployeeResponse> updateRoleId(@PathVariable Integer id,@PathVariable Integer roleId) {
+    @PatchMapping("/{id}/roleId")
+    public ResponseEntity<EmployeeResponse> updateRoleId(@PathVariable Integer id, Integer roleId) {
         try {
             return ResponseEntity.ok(employeeService.updateRoleId(id, roleId));
         } catch (RuntimeException ex) {
