@@ -54,10 +54,28 @@ public class EmployeeController
         }
     }
 
-    @PatchMapping("/{id}/active")
-    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id, boolean isActive) {
+    @PatchMapping("/{id}/{isActive}/isactive")
+    public ResponseEntity<EmployeeResponse> changeActive(@PathVariable Integer id,@PathVariable boolean isActive) {
         try {
             return ResponseEntity.ok(employeeService.changeActive(id, isActive));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}/{password}/password")
+    public ResponseEntity<EmployeeResponse> updatePassword(@PathVariable Integer id,@PathVariable String password) {
+        try {
+            return ResponseEntity.ok(employeeService.updatePassword(id, password));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}/{roleId}/roleid")
+    public ResponseEntity<EmployeeResponse> updateRoleId(@PathVariable Integer id,@PathVariable Integer roleId) {
+        try {
+            return ResponseEntity.ok(employeeService.updateRoleId(id, roleId));
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }

@@ -49,6 +49,14 @@ public ProductResponse update(Integer id, ProductRequest productRequest) {
     return new ProductResponse(product);
 }
 
+    public ProductResponse updateStatus(Integer id, String status) {
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        product.setStatus(status);
+        productRepository.save(product);
+        return new ProductResponse(product);
+    }
+
 public void delete(Integer id) {
     if (!productRepository.existsById(id)) {
         throw new RuntimeException("Produto não encontrado");

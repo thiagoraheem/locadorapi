@@ -1,14 +1,23 @@
 package com.locador.api.dto.basics;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AddressRequest {
 
+    @NotBlank(message = "A rua é obrigatória")
     private String street;
+    @NotBlank(message = "O número é obrigatório")
     private String number;
-    private String complement;
+    private String complement; // Não obrigatório
+    @NotBlank(message = "O bairro é obrigatório")
     private String neighborhood;
+    @NotBlank(message = "A cidade é obrigatória")
     private String city;
+    @NotBlank(message = "O estado é obrigatório")
     private String state;
+    @NotBlank(message = "O código postal é obrigatório")
     private String zipCode;
+
 
     public String getStreet() {
         return street;

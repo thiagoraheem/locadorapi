@@ -4,6 +4,7 @@ import com.locador.api.model.basics.Address;
 
 public class AddressResponse {
 
+    private Integer id;
     private String street;
     private String number;
     private String complement;
@@ -11,6 +12,14 @@ public class AddressResponse {
     private String city;
     private String state;
     private String zipCode;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getStreet() {
         return street;
@@ -68,6 +77,7 @@ public class AddressResponse {
     }
 
     public AddressResponse(Address address) {
+        this.id = address.getId();
         this.street = address.getStreet();
         this.number = address.getNumber();
         this.complement = address.getComplement();

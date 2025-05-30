@@ -49,6 +49,7 @@ public class EmployeeService {
         return new EmployeeResponse(employee);
     }
 
+
     public EmployeeResponse changeActive(Integer id, boolean isActive) {
 
         Employee employee = employeeRepository.findById(id)
@@ -57,6 +58,23 @@ public class EmployeeService {
         employee.setIsActive(isActive);
         employeeRepository.save(employee);
 
+        return new EmployeeResponse(employee);
+    }
+
+    public EmployeeResponse updatePassword(Integer id, String password) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+        employee.setPassword(password);
+        employeeRepository.save(employee);
+
+        return new EmployeeResponse(employee);
+    }
+
+    public EmployeeResponse updateRoleId(Integer id, Integer roleId) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+        employee.setRoleId(roleId);
+        employeeRepository.save(employee);
         return new EmployeeResponse(employee);
     }
 
