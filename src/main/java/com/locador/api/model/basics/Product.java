@@ -33,7 +33,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private ProductType type;
-    
+
     // Getters and Setters
     public Integer getId() {
         return id;
@@ -108,6 +108,18 @@ public class Product {
     }
 
     public Product() {}
+
+    public Product(Integer id, String description,  String brand, String model, BigDecimal costPrice, BigDecimal rentalPrice, String status, ProductCategory productCategory, ProductType productType){
+        this.id = id;
+        this.description = description;
+        this.brand = brand;
+        this.model = model;
+        this.costPrice = costPrice;
+        this.rentalPrice = rentalPrice;
+        this.status = status;
+        this.category = productCategory;
+        this.type = productType;
+    }
 
     public Product (ProductRequest productRequest) {
         this.category = new ProductCategory(productRequest.getCategory_id(), "", true);

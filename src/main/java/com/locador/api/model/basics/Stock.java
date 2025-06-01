@@ -1,5 +1,6 @@
 package com.locador.api.model.basics;
 
+import com.locador.api.dto.basics.StockRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "stock")
@@ -21,6 +24,16 @@ public class Stock {
     
     private Integer quantity;
     private Integer minimumQuantity;
+
+    public Stock(){}
+
+    public Stock(StockRequest stockRequest){
+        this.quantity = stockRequest.getQuantity();
+        this.minimumQuantity = stockRequest.getMinimumQuantity();
+        ProductCategory productCategory = new ProductCategory(1, "nameCategory", true);
+        ProductType productType = new ProductType(1, "nameType");
+        this.product = new Product(stockRequest.getProduct_id(), "descricao", "marca", "modelo", BigDecimal.valueOf(1), BigDecimal.valueOf(2), "disponivel", productCategory, productType);
+    }
     
     // Getters and Setters
     public Integer getId() {
