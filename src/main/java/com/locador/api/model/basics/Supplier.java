@@ -1,6 +1,8 @@
 package com.locador.api.model.basics;
 
 import java.time.LocalDate;
+
+import com.locador.api.dto.basics.SupplierRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,8 +30,9 @@ public class Supplier {
     private Address address;
     
     private LocalDate registrationDate;
-    
-    // Getters and Setters
+
+    public Supplier(){}
+
     public Integer getId() {
         return id;
     }
@@ -76,5 +79,12 @@ public class Supplier {
     
     public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+    public Supplier(SupplierRequest supplierRequest) {
+        this.name = supplierRequest.getName();
+        this.document = supplierRequest.getDocument();
+        this.personType = new PersonType(supplierRequest.getPersonType_id(), "nome");
+        this.address = new Address(supplierRequest.getAddress_id(), "g", "f", "e", "d", "c", "b", "a");
+        this.registrationDate = supplierRequest.getRegistrationDate();
     }
 }

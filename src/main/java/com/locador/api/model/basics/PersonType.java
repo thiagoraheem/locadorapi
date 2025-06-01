@@ -14,8 +14,14 @@ public class PersonType {
     private Integer id;
     
     private String name;
-    
-    // Getters and Setters
+
+    public PersonType(){}
+
+    public PersonType(Integer id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
