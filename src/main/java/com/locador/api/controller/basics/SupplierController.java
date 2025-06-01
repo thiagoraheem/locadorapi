@@ -1,7 +1,10 @@
 package com.locador.api.controller.basics;
 
+import com.locador.api.dto.basics.SupplierRequest;
+import com.locador.api.dto.basics.SupplierResponse;
 import com.locador.api.model.basics.Supplier;
 import com.locador.api.service.basics.SupplierService;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,35 +19,36 @@ public class SupplierController {
     private SupplierService supplierService;
 
     @GetMapping
-    public ResponseEntity<List<Supplier>> getAll(){
+    public ResponseEntity<List<SupplierResponse>> getAll(){
         try{
-            List<Supplier> suppliers = supplierService.findAll();
-            if(suppliers.isEmpty()){
+            List<SupplierResponse> suppliersResponse = supplierService.findAll();
+
+            if(suppliersResponse.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(suppliers);
+            return ResponseEntity.ok(suppliersResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Supplier> getById(@PathVariable Integer id){
+    public ResponseEntity<SupplierResponse> getById(@PathVariable @Positive Integer id){
         return supplierService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping
-    public ResponseEntity<Supplier> create(@RequestBody Supplier supplier){
+    public ResponseEntity<SupplierResponse> create(@RequestBody SupplierRequest supplierRequest) {
         try {
-            return ResponseEntity.ok(supplierService.save(supplier));
-        }catch(RuntimeException e){
+            return ResponseEntity.ok(supplierService.save(supplierRequest));
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Supplier> update(@PathVariable Integer id, @RequestBody Supplier supplier){
+    public ResponseEntity<SupplierResponse> update(@PathVariable Integer id, @RequestBody SupplierRequest supplierRequest){
         try{
-            return ResponseEntity.ok(supplierService.update(id, supplier));
+            return ResponseEntity.ok(supplierService.update(id, supplierRequest));
         } catch(RuntimeException e){
             return ResponseEntity.notFound().build();
         }

@@ -1,6 +1,7 @@
 package com.locador.api.model.basics;
 
 import com.locador.api.dto.basics.AddressRequest;
+import com.locador.api.dto.basics.SupplierRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +22,32 @@ public class Address {
     private String city;
     private String state;
     private String zipCode;
-    
-    // Getters and Setters
+
+    public Address(){}
+
+    public Address(Integer id, String street, String number,
+                   String complement, String neighborhood, String city,
+                   String state, String zipCode)  {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    public Address(AddressRequest addressRequest) {
+        this.street = addressRequest.getStreet();
+        this.number = addressRequest.getNumber();
+        this.complement = addressRequest.getComplement();
+        this.neighborhood = addressRequest.getNeighborhood();
+        this.city = addressRequest.getCity();
+        this.state = addressRequest.getState();
+        this.zipCode = addressRequest.getZipCode();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -85,17 +110,5 @@ public class Address {
     
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public Address(){}
-
-    public Address(AddressRequest addressRequest) {
-        this.street = addressRequest.getStreet();
-        this.number = addressRequest.getNumber();
-        this.complement = addressRequest.getComplement();
-        this.neighborhood = addressRequest.getNeighborhood();
-        this.city = addressRequest.getCity();
-        this.state = addressRequest.getState();
-        this.zipCode = addressRequest.getZipCode();
     }
 }

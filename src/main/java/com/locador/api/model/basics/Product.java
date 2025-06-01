@@ -107,13 +107,9 @@ public class Product {
         this.type = type;
     }
 
-    public Product() {
-        
-    }
+    public Product() {}
 
     public Product (ProductRequest productRequest) {
-        //nessa linha, teria que fazer uma consulta no banco de dados pra poder...
-        //...retornar o name e o status
         this.category = new ProductCategory(productRequest.getCategory_id(), "", true);
         this.description = productRequest.getDescription();
         this.brand = productRequest.getBrand();
