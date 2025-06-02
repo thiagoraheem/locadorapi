@@ -33,7 +33,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private ProductType type;
-    
+
     // Getters and Setters
     public Integer getId() {
         return id;
@@ -107,13 +107,21 @@ public class Product {
         this.type = type;
     }
 
-    public Product() {
-        
+    public Product() {}
+
+    public Product(Integer id, String description,  String brand, String model, BigDecimal costPrice, BigDecimal rentalPrice, String status, ProductCategory productCategory, ProductType productType){
+        this.id = id;
+        this.description = description;
+        this.brand = brand;
+        this.model = model;
+        this.costPrice = costPrice;
+        this.rentalPrice = rentalPrice;
+        this.status = status;
+        this.category = productCategory;
+        this.type = productType;
     }
 
     public Product (ProductRequest productRequest) {
-        //nessa linha, teria que fazer uma consulta no banco de dados pra poder...
-        //...retornar o name e o status
         this.category = new ProductCategory(productRequest.getCategory_id(), "", true);
         this.description = productRequest.getDescription();
         this.brand = productRequest.getBrand();

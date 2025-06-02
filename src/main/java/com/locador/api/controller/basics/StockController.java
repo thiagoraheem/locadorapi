@@ -1,6 +1,7 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.model.basics.Stock;
+import com.locador.api.dto.basics.StockRequest;
+import com.locador.api.dto.basics.StockResponse;
 import com.locador.api.service.basics.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,38 +17,38 @@ public class StockController {
     private StockService stockService;
 
     @GetMapping
-    public ResponseEntity<List<Stock>> getAll(){
+    public ResponseEntity<List<StockResponse>> getAll(){
         try{
-            List<Stock> stocks = stockService.findAll();
-            if(stocks.isEmpty()){
+            List<StockResponse> stockResponses = stockService.findAll();
+            if(stockResponses.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(stocks);
+            return ResponseEntity.ok(stockResponses);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Stock> getById(@PathVariable Integer id){
+    public ResponseEntity<StockResponse> getById(@PathVariable Integer id){
         return stockService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Stock> create(@RequestBody Stock stock){
+    public ResponseEntity<StockResponse> create(@RequestBody StockRequest stockRequest){
         try{
-            return ResponseEntity.ok(stockService.save(stock));
+            return ResponseEntity.ok(stockService.save(stockRequest));
         } catch(RuntimeException e){
          return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Stock> update(@PathVariable Integer id, @RequestBody Stock stock){
+    public ResponseEntity<StockResponse> update(@PathVariable Integer id, @RequestBody StockRequest stockRequest){
         try{
-            return ResponseEntity.ok(stockService.update(id, stock));
+            return ResponseEntity.ok(stockService.update(id, stockRequest));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
