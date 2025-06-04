@@ -1,5 +1,6 @@
 package com.locador.api.model.basics;
 
+import com.locador.api.dto.basics.PaymentMethodRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,13 @@ public class PaymentMethod {
     private Integer id;
     
     private String name;
-    
+
+    public PaymentMethod(){}
+
+    public PaymentMethod(PaymentMethodRequest request) {
+        this.name = request.getName();
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;
