@@ -83,8 +83,8 @@ public class Supplier {
     public Supplier(SupplierRequest supplierRequest) {
         this.name = supplierRequest.getName();
         this.document = supplierRequest.getDocument();
-        this.personType = new PersonType(supplierRequest.getPersonType_id(), "nome");
-        this.address = new Address(supplierRequest.getAddress_id(), "g", "f", "e", "d", "c", "b", "a");
+        this.personType = new PersonType(supplierRequest.getPersonType_id());
+        this.address = new Address(supplierRequest.getAddress_id());
         this.registrationDate = supplierRequest.getRegistrationDate();
     }
 }

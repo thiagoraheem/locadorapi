@@ -1,6 +1,7 @@
 package com.locador.api.controller.basics;
 
-import com.locador.api.model.basics.PaymentMethod;
+import com.locador.api.dto.basics.PaymentMethodRequest;
+import com.locador.api.dto.basics.PaymentMethodResponse;
 import com.locador.api.service.basics.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,46 +18,53 @@ public class PaymentMethodController {
     private PaymentMethodService paymentMethodService;
 
     @GetMapping
-    public ResponseEntity<List<PaymentMethod>> getAll(){
-        try{
-            List<PaymentMethod> paymentMethods = paymentMethodService.findAll();
+    public ResponseEntity<List<PaymentMethodResponse>> getAll(){
+        try {
+            List<PaymentMethodResponse> paymentMethods = paymentMethodService.findAll();
             if(paymentMethods.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
             return ResponseEntity.ok(paymentMethods);
-        } catch (RuntimeException e) {
-            return ResponseEntity.noContent().build();
+        } catch(RuntimeException e){
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentMethod> getById(@PathVariable Integer id) {
-        return paymentMethodService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<PaymentMethodResponse> getById(@PathVariable Integer id){
+        try {
+            return paymentMethodService.findById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch(RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
-    public ResponseEntity<PaymentMethod> create(@RequestBody PaymentMethod paymentMethod){
-        return ResponseEntity.ok(paymentMethodService.save(paymentMethod));
+    public ResponseEntity<PaymentMethodResponse> create(@RequestBody PaymentMethodRequest paymentMethodRequest){
+        try {
+            return ResponseEntity.ok(paymentMethodService.save(paymentMethodRequest));
+        } catch(RuntimeException e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PaymentMethod> update(@PathVariable Integer id, @RequestBody PaymentMethod paymentMethod) {
+    public ResponseEntity<PaymentMethodResponse> update(@PathVariable Integer id, @RequestBody PaymentMethodRequest paymentMethodRequest){
         try {
-            return ResponseEntity.ok(paymentMethodService.update(paymentMethod, id));
-        } catch (RuntimeException e) {
+            return ResponseEntity.ok(paymentMethodService.update(id, paymentMethodRequest));
+        } catch(RuntimeException e){
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
-        try{
+        try {
             paymentMethodService.delete(id);
             return ResponseEntity.noContent().build();
-        }
-        catch(RuntimeException e){
+        } catch(RuntimeException e){
             return ResponseEntity.notFound().build();
         }
     }

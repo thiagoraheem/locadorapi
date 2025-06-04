@@ -22,6 +22,10 @@ public class PersonType {
         this.name = name;
     }
 
+    public PersonType(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -25,6 +25,10 @@ public class Address {
 
     public Address(){}
 
+    public Address(Integer id){
+        this.id = id;
+    }
+
     public Address(Integer id, String street, String number,
                    String complement, String neighborhood, String city,
                    String state, String zipCode)  {
