@@ -2,9 +2,7 @@ package com.locador.api.service.basics;
 
 import com.locador.api.dto.basics.EmployeeRequest;
 import com.locador.api.dto.basics.EmployeeResponse;
-import com.locador.api.dto.basics.ProductResponse;
 import com.locador.api.model.basics.Employee;
-import com.locador.api.model.basics.Product;
 import com.locador.api.repository.basics.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
