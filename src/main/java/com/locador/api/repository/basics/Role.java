@@ -1,5 +1,5 @@
-package com.locador.api.repository.basics;
+    package com.locador.api.repository.basics;
 
-public enum Role {
-    ADMIN, USER
-}
+    public enum Role {
+        ADMIN, USER
+    }
