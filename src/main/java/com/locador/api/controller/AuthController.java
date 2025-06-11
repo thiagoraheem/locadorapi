@@ -1,4 +1,4 @@
-package com.locador.api.controller.basics;
+package com.locador.api.controller;
 
 import com.locador.api.dto.basics.AuthRequest;
 import com.locador.api.dto.basics.AuthResponse;
