@@ -8,6 +8,7 @@ import com.locador.api.repository.basics.UserRepository;
 import com.locador.api.service.basics.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class AuthDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository repo;
     @Autowired
-    private JwtService jwtService;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,12 +33,12 @@ public class AuthDetailsServiceImpl implements UserDetailsService {
 
         User user = new User();
         user.setUsername(authRequest.getUsername());
-        user.setPassword(authRequest.getPassword()); // Ideal: criptografar com BCrypt
+        user.setPassword(passwordEncoder.encode(authRequest.getPassword())); // Ideal: criptografar com BCrypt
         user.setRole(Role.USER);
         repo.save(user);
 
-        AuthDetailsImpl authDetailsImpl = new AuthDetailsImpl(user);
-        String token = jwtService.generateToken(authDetailsImpl);
-        return new AuthResponse(token); // ← já retorna o token encapsulado
+        //uthDetailsImpl authDetailsImpl = new AuthDetailsImpl(user);
+        //String token = jwtService.generateToken(authDetailsImpl);
+        return new AuthResponse("Usuário criado com sucesso"); // ← já retorna o token encapsulado
     }
 }
