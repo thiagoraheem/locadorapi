@@ -29,7 +29,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // libere TUDO em /api/auth/**
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/ping/**").permitAll()
                         // todo o resto exige autenticação
                         .anyRequest().authenticated()
                 )
