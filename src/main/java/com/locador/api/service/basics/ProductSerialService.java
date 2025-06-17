@@ -18,9 +18,6 @@ public class ProductSerialService {
     }
 
     public Optional<ProductSerial> findById(Integer id){
-        if (!productSerialRepository.existsById(id)){
-            throw new RuntimeException("ProductSerial não encontrado");
-        }
         return productSerialRepository.findById(id);
     }
 

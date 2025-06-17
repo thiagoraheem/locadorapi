@@ -5,7 +5,6 @@ import com.locador.api.dto.basics.AuthResponse;
 import com.locador.api.model.basics.User;
 import com.locador.api.repository.basics.Role;
 import com.locador.api.repository.basics.UserRepository;
-import com.locador.api.service.basics.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
