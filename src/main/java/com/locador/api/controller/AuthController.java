@@ -3,13 +3,12 @@ package com.locador.api.controller;
 import com.locador.api.dto.basics.AuthRequest;
 import com.locador.api.dto.basics.AuthResponse;
 import com.locador.api.security.impl.AuthDetailsServiceImpl;
-import com.locador.api.service.basics.JwtService;
+import com.locador.api.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

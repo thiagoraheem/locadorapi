@@ -1,4 +1,4 @@
-package com.locador.api.service.basics;
+package com.locador.api.security.service;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

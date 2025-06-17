@@ -1,7 +1,7 @@
     package com.locador.api.security.token;
 
     import com.locador.api.security.impl.AuthDetailsServiceImpl;
-    import com.locador.api.service.basics.JwtService;
+    import com.locador.api.security.service.JwtService;
     import jakarta.servlet.FilterChain;
     import jakarta.servlet.ServletException;
     import jakarta.servlet.http.HttpServletRequest;
