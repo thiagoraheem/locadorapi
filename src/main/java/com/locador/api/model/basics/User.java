@@ -1,6 +1,6 @@
 package com.locador.api.model.basics;
 
-import com.locador.api.repository.basics.Role;
+import com.locador.api.enumeracoes.Role;
 import jakarta.persistence.*;
 
 @Entity
