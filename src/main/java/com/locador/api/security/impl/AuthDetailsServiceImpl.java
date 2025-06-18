@@ -3,7 +3,7 @@ package com.locador.api.security.impl;
 import com.locador.api.dto.basics.AuthRequest;
 import com.locador.api.dto.basics.AuthResponse;
 import com.locador.api.model.basics.User;
-import com.locador.api.repository.basics.Role;
+import com.locador.api.enumeracoes.Role;
 import com.locador.api.repository.basics.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
