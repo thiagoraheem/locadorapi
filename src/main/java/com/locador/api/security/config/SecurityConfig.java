@@ -1,7 +1,7 @@
 package com.locador.api.security.config;
 
 import com.locador.api.security.token.TokenFilter;
-import com.locador.api.security.impl.AuthDetailsServiceImpl;
+import com.locador.api.security.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
     @Autowired private TokenFilter tokenFilter;
-    @Autowired private AuthDetailsServiceImpl userService;
+    @Autowired private UserDetailsServiceImpl userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

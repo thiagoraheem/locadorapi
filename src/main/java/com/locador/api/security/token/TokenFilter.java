@@ -1,6 +1,6 @@
     package com.locador.api.security.token;
 
-    import com.locador.api.security.impl.AuthDetailsServiceImpl;
+    import com.locador.api.security.impl.UserDetailsServiceImpl;
     import com.locador.api.security.service.JwtService;
     import jakarta.servlet.FilterChain;
     import jakarta.servlet.ServletException;
@@ -20,7 +20,7 @@
     public class TokenFilter extends OncePerRequestFilter {
 
         @Autowired private JwtService jwtService;
-        @Autowired private AuthDetailsServiceImpl userService;
+        @Autowired private UserDetailsServiceImpl userService;
 
         @Override
         protected boolean shouldNotFilter(HttpServletRequest request) {

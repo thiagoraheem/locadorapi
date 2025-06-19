@@ -3,7 +3,7 @@ package com.locador.api.security.impl;
 import com.locador.api.dto.basics.AuthRequest;
 import com.locador.api.dto.basics.AuthResponse;
 import com.locador.api.model.basics.User;
-import com.locador.api.enumeracoes.Role;
+import com.locador.api.enumeracoes.basics.Role;
 import com.locador.api.repository.basics.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository repo;
@@ -22,7 +22,7 @@ public class AuthDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-        return new AuthDetailsImpl(user);
+        return new UserDetailsImpl(user);
     }
 
     public AuthResponse save(AuthRequest authRequest){

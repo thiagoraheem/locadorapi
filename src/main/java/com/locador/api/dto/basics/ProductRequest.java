@@ -7,10 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
-import com.locador.api.model.basics.Product;
-
 public class ProductRequest {
-
 
     @Positive(message = "O ID da categoria deve ser um número positivo")
     private int category_id;
@@ -35,43 +32,110 @@ public class ProductRequest {
     @NotBlank(message = "O status é obrigatório")
     private String status;
 
-    @Positive(message = "O ID do tipo deve ser um número positivo e não pode ser nulo")
+    @Positive(message = "O ID do tipo deve ser um número positivo")
     private int type_id;
 
-    public int getCategory_id() { return category_id; }
-    public void setCategory_id(int category_id) { this.category_id = category_id; }
+    @Positive(message = "O ID da proposta deve ser um número positivo")
+    private Integer proposalId;
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    @Positive(message = "O ID do produto deve ser um número positivo")
+    private Integer productId;
 
-    public String getBrand() { return brand; }
-    public void setBrand(String brand) { this.brand = brand; }
+    public ProductRequest() {
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
+    public ProductRequest(int category_id, String description, String brand, String model,
+                          BigDecimal costPrice, BigDecimal rentalPrice, String status,
+                          int type_id, Integer proposalId, Integer productId) {
+        this.category_id = category_id;
+        this.description = description;
+        this.brand = brand;
+        this.model = model;
+        this.costPrice = costPrice;
+        this.rentalPrice = rentalPrice;
+        this.status = status;
+        this.type_id = type_id;
+        this.proposalId = proposalId;
+        this.productId = productId;
+    }
 
-    public BigDecimal getCostPrice() { return costPrice; }
-    public void setCostPrice(BigDecimal costPrice) { this.costPrice = costPrice; }
+    public int getCategory_id() {
+        return category_id;
+    }
 
-    public BigDecimal getRentalPrice() { return rentalPrice; }
-    public void setRentalPrice(BigDecimal rentalPrice) { this.rentalPrice = rentalPrice; }
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getDescription() {
+        return description;
+    }
 
-    public int getType_id() { return type_id; }
-    public void setType_id(int type_id) { this.type_id = type_id; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public ProductRequest() { }
+    public String getBrand() {
+        return brand;
+    }
 
-    public ProductRequest(Product product) {
-        this.category_id = product.getCategory().getId();
-        this.description = product.getDescription();
-        this.brand = product.getBrand();
-        this.model = product.getModel();
-        this.costPrice = product.getCostPrice();
-        this.rentalPrice = product.getRentalPrice();
-        this.status = product.getStatus();
-        this.type_id = product.getType().getId();
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public BigDecimal getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public BigDecimal getRentalPrice() {
+        return rentalPrice;
+    }
+
+    public void setRentalPrice(BigDecimal rentalPrice) {
+        this.rentalPrice = rentalPrice;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
+    }
+
+    public Integer getProposalId() {
+        return proposalId;
+    }
+
+    public void setProposalId(Integer proposalId) {
+        this.proposalId = proposalId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }
