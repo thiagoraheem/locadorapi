@@ -7,7 +7,7 @@ A classe `AuthDetailsServiceImpl` é uma implementação da interface `UserDetai
 ## Localização no Projeto
 
 ```
-com.locador.api.security.impl.AuthDetailsServiceImpl
+com.locador.api.security.impl.UserDetailsServiceImpl
 ```
 
 ## Propósito

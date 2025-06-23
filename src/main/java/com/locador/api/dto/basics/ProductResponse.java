@@ -18,6 +18,8 @@ public class ProductResponse {
     private String status;
     private int type_id;
     private String type_name;
+    private int proposalId;
+    private int productId;
 
     public ProductResponse() {
     }
@@ -25,7 +27,7 @@ public class ProductResponse {
     public ProductResponse(Product product) {
         this.id = product.getId();
         this.category_id = product.getCategory().getId();
-        this.category_name = product.getCategory().getName();//perguntar pro tiago sobre isso
+        this.category_name = product.getCategory().getName();
         this.category_status = product.getCategory().getStatus();
         this.description = product.getDescription();
         this.brand = product.getBrand();
@@ -35,6 +37,8 @@ public class ProductResponse {
         this.status = product.getStatus();
         this.type_id = product.getType().getId();
         this.type_name = product.getType().getName();
+        this.proposalId = product.getProposalProducts().get(0).getProposal().getId();
+        this.productId = product.getProposalProducts().get(0).getProduct().getId();
     }
 
     public Integer getId() {
@@ -131,5 +135,21 @@ public class ProductResponse {
 
     public void setType_name(String type_name) {
         this.type_name = type_name;
+    }
+
+    public int getProposalId() {
+        return proposalId;
+    }
+
+    public void setProposalId(int proposalId) {
+        this.proposalId = proposalId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }
