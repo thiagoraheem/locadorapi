@@ -1,62 +1,97 @@
 package com.locador.api.dto.rental;
 
+import com.locador.api.model.rental.Proposal;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProposalResponse {
+    @NotNull
+    private Integer customerId;
 
-    private Integer id;
-    private String customerName;
-    private String rentalPeriod;
-    private BigDecimal totalAmount;
-    private String status;
-    private List<String> productNames;
+    private List<ProposalItemRequest> proposalItemRequests;
 
-    public Integer getId() {
-        return id;
+    @NotNull
+    @FutureOrPresent
+    private LocalDate startDate;
+
+    @NotNull
+    @FutureOrPresent
+    private LocalDate endDate;
+    private BigDecimal estimatedAmount;
+    private String notes;
+
+    public ProposalResponse(){}
+
+    public ProposalResponse(Proposal proposal){
+        this.proposalItemRequests = proposal.getProposalItems();
+        this.customerId = proposal.getCustomer().getId();
+        this.endDate = proposal.getStartDate();
+        this.endDate = proposal.getEndDate();
+        this.estimatedAmount = proposal.getEstimatedAmount();
+        this.notes = proposal.getNotes();
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public ProposalResponse(Integer customerId,
+                           LocalDate startDate, LocalDate endDate,
+                           BigDecimal estimatedAmount, String notes){
+        this.customerId = customerId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.estimatedAmount = estimatedAmount;
+        this.notes = notes;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public String getRentalPeriod() {
-        return rentalPeriod;
+
+
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setRentalPeriod(String rentalPeriod) {
-        this.rentalPeriod = rentalPeriod;
+    public List<ProposalItemRequest> getProposalItemRequests() {
+        return proposalItemRequests;
     }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
+    public void setProposalItemRequests(List<ProposalItemRequest> proposalItemRequests) {
+        this.proposalItemRequests = proposalItemRequests;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
+    public BigDecimal getEstimatedAmount() {
+        return estimatedAmount;
     }
 
-    public String getStatus() {
-        return status;
+    public void setEstimatedAmount(BigDecimal estimatedAmount) {
+        this.estimatedAmount = estimatedAmount;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getNotes() {
+        return notes;
     }
 
-    public List<String> getProductNames() {
-        return productNames;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public void setProductNames(List<String> productNames) {
-        this.productNames = productNames;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }

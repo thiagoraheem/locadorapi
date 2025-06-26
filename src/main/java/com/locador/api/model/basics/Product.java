@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.locador.api.dto.basics.ProductRequest;
-import com.locador.api.model.rental.ProposalProduct;
+import com.locador.api.model.rental.ProposalItem;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,7 +21,7 @@ public class Product {
     private ProductCategory category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProposalProduct> proposalProducts;
+    private List<ProposalItem> proposalProducts;
 
     private String description;
     private String brand;
@@ -65,10 +65,10 @@ public class Product {
         Proposal proposal = new Proposal();
         proposal.setId(productRequest.getProposalId());
 
-        ProposalProduct proposalProduct = new ProposalProduct();
-        proposalProduct.setProposal(proposal);
+        ProposalItem proposalItem = new ProposalItem();
+        proposalItem.setProposal(proposal);
 
-        this.proposalProducts = List.of(proposalProduct);
+        this.proposalProducts = List.of(proposalItem);
     }
 
     public Integer getId() {
@@ -87,11 +87,11 @@ public class Product {
         this.category = category;
     }
 
-    public List<ProposalProduct> getProposalProducts() {
+    public List<ProposalItem> getProposalProducts() {
         return proposalProducts;
     }
 
-    public void setProposalProducts(List<ProposalProduct> proposalProducts) {
+    public void setProposalProducts(List<ProposalItem> proposalProducts) {
         this.proposalProducts = proposalProducts;
     }
 

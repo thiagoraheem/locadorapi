@@ -20,8 +20,8 @@ public class AddressService {
     public List<AddressResponse> findAll(){
         List<Address> address = addressRepository.findAll();
         List<AddressResponse> addressResponses = new ArrayList<>();
-        for(int i = 0; i < address.size(); i++){
-            addressResponses.add(new AddressResponse(address.get(i)));
+        for(Address addr : address){
+            addressResponses.add(new AddressResponse(addr));
         }
         return addressResponses;
     }
