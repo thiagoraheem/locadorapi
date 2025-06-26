@@ -1,5 +1,7 @@
 package com.locador.api.controller.rental;
 
+import com.locador.api.dto.rental.ProposalRequest;
+import com.locador.api.dto.rental.ProposalResponse;
 import com.locador.api.model.rental.Proposal;
 import com.locador.api.service.rental.ProposalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +19,34 @@ public class ProposalController {
     private ProposalService proposalService;
 
     @GetMapping
-    public ResponseEntity<List<Proposal>> getAll() {
+    public ResponseEntity<List<ProposalResponse>> getAll() {
         try {
-            List<Proposal> list = proposalService.findAll();
-            if (list.isEmpty()) {
+            List<ProposalResponse> proposalResponses = proposalService.findAll();
+            if (proposalResponses.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(list);
+            return ResponseEntity.ok(proposalResponses);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Proposal> getById(@PathVariable Integer id) {
+    public ResponseEntity<ProposalResponse> getById(@PathVariable Integer id) {
         return proposalService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Proposal> create(@RequestBody Proposal proposal) {
-        return ResponseEntity.ok(proposalService.save(proposal));
+    public ResponseEntity<ProposalResponse> create(@RequestBody ProposalRequest proposalRequest) {
+        return ResponseEntity.ok(proposalService.save(proposalRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Proposal> update(@PathVariable Integer id, @RequestBody Proposal proposal) {
+    public ResponseEntity<ProposalResponse> update(@PathVariable Integer id, @RequestBody ProposalRequest proposalRequest) {
         try {
-            return ResponseEntity.ok(proposalService.update(id, proposal));
+            return ResponseEntity.ok(proposalService.update(id, proposalRequest));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }

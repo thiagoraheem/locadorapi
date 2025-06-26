@@ -1,11 +1,13 @@
 package com.locador.api.model.rental;
 
+import com.locador.api.dto.rental.ProposalRequest;
 import com.locador.api.enumeracoes.rental.ProposalStatus;
 import com.locador.api.model.basics.Customer;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +23,7 @@ public class Proposal {
     private Customer customer;
 
     @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProposalProduct> proposalProducts;
+    private List<ProposalItem> proposalItems;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -33,6 +35,14 @@ public class Proposal {
     private String notes;
 
     public Proposal() {
+    }
+
+    public Proposal(ProposalRequest proposalRequest){
+        this.customer.setId(proposalRequest.getCustomerId());
+        this.startDate = proposalRequest.getStartDate();
+        this.endDate = proposalRequest.getEndDate();
+        this.estimatedAmount = proposalRequest.getEstimatedAmount();
+        this.notes = proposalRequest.getNotes();
     }
 
     public Integer getId() {
@@ -51,12 +61,12 @@ public class Proposal {
         this.customer = customer;
     }
 
-    public List<ProposalProduct> getProposalProducts() {
-        return proposalProducts;
+    public List<ProposalItem> getProposalItems() {
+        return proposalItems;
     }
 
-    public void setProposalProducts(List<ProposalProduct> proposalProducts) {
-        this.proposalProducts = proposalProducts;
+    public void setProposalItems(List<ProposalItem> proposalItems) {
+        this.proposalItems = proposalItems;
     }
 
     public LocalDate getStartDate() {
